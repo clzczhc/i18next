@@ -168,7 +168,7 @@ i18n
   .use(Backend)
   .use(initReactI18next)
   .init({
-    fallbackLng: "en", // 备选语言（当lng对应语言资源不存在时）
+    fallbackLng: "en", // 备选语言
 
     interpolation: {
       escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
@@ -213,8 +213,11 @@ function App() {
   const [show, setShow] = useState(false);
 
   const addPart = () => {
-    setShow(true);
-    i18n.loadNamespaces("addPart");
+    i18n.loadNamespaces("addPart", (err) => {
+      if (!err) {
+        setShow(true);
+      }
+    });
   };
 
   return (
@@ -222,6 +225,7 @@ function App() {
       <h1>{t("Vue")}</h1>
       <button onClick={() => changeLanguage("en")}>en</button>
       <button onClick={() => changeLanguage("zh")}>zh</button>
+      <button onClick={() => changeLanguage("fr")}>fr</button>
       <button onClick={() => addPart()}>addPart</button>
 
       {show && <h1>{t("name", { ns: "addPart" })}</h1>}
@@ -231,3 +235,5 @@ function App() {
 
 export default App;
 ```
+
+> loadNamespaces 时，好像会不只是加载当前语言的，而且还会加载`fallbackLng`的，可能是保险之类的原因。

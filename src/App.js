@@ -13,8 +13,11 @@ function App() {
   const [show, setShow] = useState(false);
 
   const addPart = () => {
-    setShow(true);
-    i18n.loadNamespaces("addPart");
+    i18n.loadNamespaces("addPart", (err) => {
+      if (!err) {
+        setShow(true);
+      }
+    });
   };
 
   return (
@@ -22,6 +25,7 @@ function App() {
       <h1>{t("Vue")}</h1>
       <button onClick={() => changeLanguage("en")}>en</button>
       <button onClick={() => changeLanguage("zh")}>zh</button>
+      <button onClick={() => changeLanguage("fr")}>fr</button>
       <button onClick={() => addPart()}>addPart</button>
 
       {show && <h1>{t("name", { ns: "addPart" })}</h1>}

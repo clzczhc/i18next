@@ -11,7 +11,7 @@ i18n
   .use(Backend)
   .use(initReactI18next)
   .init({
-    fallbackLng: "en", // 备选语言（当lng对应语言资源不存在时）
+    fallbackLng: "zh", // 备选语言（当lng对应语言资源不存在时）
 
     interpolation: {
       escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
