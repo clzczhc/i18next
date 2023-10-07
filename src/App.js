@@ -4,7 +4,8 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const { t, i18n } = useTranslation("common");
+  // common.json是默认的翻译资源，所以可传可不传
+  const { t, i18n } = useTranslation(); /* useTranslation("common") */;
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -22,7 +23,7 @@ function App() {
 
   return (
     <>
-      <h1>{t("Vue")}</h1>
+      <h1>{t("React")}</h1>
       <button onClick={() => changeLanguage("en")}>en</button>
       <button onClick={() => changeLanguage("zh")}>zh</button>
       <button onClick={() => changeLanguage("fr")}>fr</button>
